@@ -1,46 +1,60 @@
-# FDE B · Octo product intake
+# FDE B · Octo Product Intake
 
-This is the independent examination demand pool for the Sep 8, 2026 afternoon practical. It is not the upstream Octo issue tracker. The upstream `Mininglamp-OSS/octo-server` repository is read-only.
+**English** | [简体中文](README.zh-CN.md)
+
+An independent demand pool for the **September 8, 2026 afternoon** FDE practical examination: evidence-based product Q&A, feedback intake, product requirements, and independent review for [octo-server](https://github.com/Mininglamp-OSS/octo-server).
+
+The upstream repository is read-only. This repository holds examination issues and reusable documentation; it is not the upstream issue tracker.
+
+## Start here
+
+- [Browse the demand pool](https://github.com/chobitsX/octo-fde-b-intake/issues)
+- [Workflow, labels, and examiner operations — English / 中文](docs/workflow.md)
+- [PRD template — English / 中文](templates/prd.md)
 
 ## Agents
 
 | Role | Octo bot | Responsibility |
 | --- | --- | --- |
-| Product steward | FDE-B 产品管家 | Evidence-based Q&A, feedback intake, product ownership, PRDs and revisions |
-| Independent reviewer | FDE-B PRD评审 | Review actual PRDs, document blocking findings or approval |
+| Product steward | FDE-B 产品管家 | Source-backed Q&A, feedback intake, ownership, PRDs, and revisions |
+| Independent reviewer | FDE-B PRD评审 | Read the actual PRD and record concrete approval or blocking findings |
 
-## Workflow
+Both bots participate in the examination's Octo group. Normal answers address the requester; every group output also mentions the main examiner. Issue updates additionally mention the relevant feedback participants when their originating Octo identity is available.
 
-1. Archive feedback with type, priority, status, user context and explicit missing information.
-2. An open issue labeled `feature` enters the product workflow.
-3. The steward claims the issue, publishes a versioned PRD, and requests independent review.
-4. The reviewer records concrete approval or change requests. Revisions keep prior versions and explain the changes.
-5. A scheduler checks issue state and relevant labels every two minutes, including issues silently closed by a maintainer. Notifications mention the examiner and affected participants in the originating Octo group.
+## Product workflow
 
-PRDs describe **what users need**, user-visible behavior and acceptance criteria. Approval means the product document passed review; it does not mean the feature was implemented.
+1. Archive feedback with its type, priority, status, user context, and explicit missing information.
+2. An open issue labeled `feature` or `type:feature` enters product work.
+3. The steward claims the issue, publishes a versioned PRD in its comments, and requests independent review.
+4. The reviewer approves or requests specific changes. Revisions preserve earlier versions and explain how the findings were addressed.
+5. A server-side scheduler scans issue states and relevant labels every **two minutes**, including silently closed issues. Meaningful changes are reported to Octo; empty scans stay silent.
 
-## Labels
+PRDs describe **what users need**, observable behavior, and acceptance criteria. PRD approval does not mean the feature has been implemented. A close without fix evidence is reported as **closed, fix unconfirmed**; “cannot reproduce” and “won't fix” retain their own meanings.
 
-- Type: `type:bug`, `type:feature`, `type:question`, `type:task`.
-- Priority: `priority:P0` (critical), `P1` (high impact), `P2` (normal), `P3` (polish).
-- Status: `status:triage`, `status:needs-info`, `status:needs-human`, `status:in-progress`, `status:in-review`, `status:changes-requested`, `status:approved`.
-- Resolution: `resolution:fixed`, `resolution:cannot-reproduce`, `resolution:wontfix`. Plain `wontfix` and GitHub `not_planned` are also recognized.
-- `rehearsal`: synthetic preparation data, not a confirmed upstream defect.
+## Repository layout
 
-A closed issue without authoritative fix evidence is reported as **closed, fix unconfirmed**. “Cannot reproduce” and “won't fix” remain separate from “fixed”.
+```text
+README.md                 English entry point
+README.zh-CN.md           Chinese entry point
+docs/
+  workflow.md             Workflow, labels, and examiner instructions
+templates/
+  prd.md                  Bilingual PRD template
+PRD-TEMPLATE.md           Compatibility link to the template
+```
 
-## Source evidence
+Issues and their comments are the record of requirements, PRD versions, and review decisions. The directories contain reusable documentation, so the same requirement does not need to be maintained in a second file tree. Existing [rehearsal issues](https://github.com/chobitsX/octo-fde-b-intake/issues?q=is%3Aissue%20label%3Arehearsal) are synthetic preparation material, not confirmed upstream defects.
 
-The preparation source snapshot is `c7abadeb183a0ac55252f03e5f47d192a48f6f4d` of `Mininglamp-OSS/octo-server` (September 7, 2026).
+## Knowledge and source evidence
 
-Code answers use repository-relative evidence such as `来源: main.go#L45-L60`, after reading the actual corresponding lines. Paths and line ranges are checked before publishing an answer. The example format does not assert that this particular range answers any question.
+The fixed source snapshot is [`c7abadeb183a0ac55252f03e5f47d192a48f6f4d`](https://github.com/Mininglamp-OSS/octo-server/tree/c7abadeb183a0ac55252f03e5f47d192a48f6f4d), captured on September 7, 2026.
 
-The knowledge base covers authentication, permissions, configuration, module registration, APIs and errors, the server/IM boundary, bot identity and sessions, persistence, and build/deployment.
+The knowledge index covers nine domains: authentication; permissions; configuration; module registration; APIs and errors; the server/IM boundary; bot identity and sessions; persistence and external dependencies; build and deployment.
 
-## Examiner operations
+Answers read the actual source and cite `来源: <relative-path>#L<start>-L<end>`. File paths and line ranges are checked before delivery. Missing knowledge is stated as uncertain, with a consultation route and the evidence to obtain.
 
-The examiner may read all issues publicly. Closing other people's issues and changing labels requires accepting the repository collaborator invitation first. The invitation is scoped to this examination repository.
+## Examiner access and operational boundaries
 
-To exercise automation, change an issue on GitHub without sending another Octo message. A new `feature` label triggers product work; a silent close or `wontfix` produces an appropriately worded change notification. Empty polls remain silent.
+The repository is public. Closing others' issues and changing labels requires repository collaborator access; the examiner must accept the invitation before those operations.
 
-The agents use a fine-grained credential scoped to this repository's Issues permission. No secrets, host configuration or private group transcripts are stored in this repository.
+The agents use a fine-grained credential limited to this repository's Issues permission. Credentials, host configuration, and private group transcripts stay out of this repository. Documentation edits here do not update the frozen Agent runtime or its knowledge snapshot.

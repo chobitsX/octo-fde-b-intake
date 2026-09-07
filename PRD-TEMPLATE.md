@@ -1,29 +1,11 @@
-# Product requirement template
+# PRD template / PRD 模板
 
-## Background and goal
+The bilingual template now lives in [`templates/prd.md`](templates/prd.md). This entry remains available for existing links.
 
-Who experiences the problem, in what context, and what user outcome should improve?
+中英双语模板已整理到 [`templates/prd.md`](templates/prd.md)，保留本入口以兼容原有链接。
 
-## Target users and scenarios
+Publish completed PRDs as versioned comments on the corresponding issue. Keep earlier versions and review decisions available.
 
-Describe the main scenario, relevant user permissions and important exceptions.
+填写完成的 PRD 应以带版本的评论发布到对应 Issue，保留历史版本与评审结论。
 
-## Scope
-
-State what is included and what is explicitly outside this version.
-
-## User flow and business rules
-
-Describe what users can see and do, including empty states, invalid operations, cancellation, errors and recovery where relevant.
-
-## Acceptance criteria
-
-Use observable outcomes. Example: “A member who lacks permission sees an explanation and cannot perform the restricted action.” Do not substitute internal API status codes or database changes for user outcomes.
-
-## Open questions and assumptions
-
-List facts that need confirmation and who can confirm them. Do not present assumptions as user approval.
-
-## Revision log
-
-When review requests changes, map each blocking finding to the corresponding revision. Preserve earlier PRD versions in issue comments.
+[English overview](README.md) · [中文说明](README.zh-CN.md)
